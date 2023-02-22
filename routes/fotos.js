@@ -16,13 +16,40 @@ router.get('/add',(req,res,next)=>{
 })
 
 router.post('/add',async(req,res)=>{
-  const {titulo, fotos_url, descripcion}= req.body
+  const {titulo, url, descripcion}= req.body
   const newFoto ={
     titulo,
-    fotos_url,
+    url,
     descripcion
   }
-  await pool.query('INSERT INTO url SET ?',[newFoto])
+  await pool.query('INSERT INTO fotos SET ?',[newFoto])
+  res.redirect('/fotos')
+})
+
+router.post('/borrar/:id', async(req,res)=>{
+  const {id} = req.params
+  await pool.query('DELETE FROM fotos WHERE id = ?', [id])
+  res.redirect('fotos')
+})
+
+
+
+router.get('/edit/:id' ,async(req,res) =>{
+  const {id} = req.params
+  const [foto] = await pool.query('SELECT * FROM fotos WHERE id = ?', [id])
+  console.log(foto)
+  res.render('fotos/edit' ,{foto:foto[0]})
+})
+
+router.post('/edit/:id', async(req,res)=>{
+  const {id } = req.params
+  const {titulo, url, descripcion} = req.body
+  const newFoto = {
+    titulo,
+    url,
+    descripcion
+  }
+  await pool.query('UPDATE fotos SET ? WHERE id = ?', [newFoto, id])
   res.redirect('/fotos')
 })
 

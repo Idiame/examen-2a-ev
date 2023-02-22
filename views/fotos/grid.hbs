@@ -3,9 +3,15 @@
         {{#each url}}
             <div class="col-md-3">
                 <div class="card text-center">
+                    <div>
+                        <a href="#"> <i class="fas fa-"></i></a>
+                        <a href="#"> <i class="fas fa-heart"></i></a>
+                    </div>
                     <h3 class="card-title text-uppercase">{{titulo}}</h3>
-                    <img src="{{fotos_url}}" class="m-2">
-                    <a href="/fotos/borrar/{{id}}" class="btn btn-danger"><i class="fas fa-trash"></i></a>     
+                    <img src="{{url}}" class="m-2">
+                    <p >{{descripcion}}</p>
+                    <a href="/fotos/borrar/{{id}}" class="btn btn-danger"><i class="fas fa-trash"></i></a> 
+                    <a href="/fotos/edit/{{id}}" class="btn btn-secondary"> <i class="fas fa-pen"></i></a>    
                 </div>
             </div>
         {{else}}
