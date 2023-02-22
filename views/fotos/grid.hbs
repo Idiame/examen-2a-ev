@@ -1,6 +1,6 @@
 <div class="container p-4">
     <div class="row">
-        {{#each url}}
+        {{#each fotos}}
             <div class="col-md-3">
                 <div class="card text-center">
                     <div>
@@ -9,8 +9,8 @@
                     </div>
                     <h3 class="card-title text-uppercase">{{titulo}}</h3>
                     <img src="{{url}}" class="m-2">
-                    <p >{{descripcion}}</p>
-                    <a href="/fotos/borrar/{{id}}" class="btn btn-danger"><i class="fas fa-trash"></i></a> 
+                    <p>{{descripcion}}</p>
+                    <a href="/fotos/delete/{{id}}" class="btn btn-danger"><i class="fas fa-trash"></i></a> 
                     <a href="/fotos/edit/{{id}}" class="btn btn-secondary"> <i class="fas fa-pen"></i></a>    
                 </div>
             </div>

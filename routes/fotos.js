@@ -6,14 +6,14 @@ const pool = require('../database')
 /* GET users listing. */
 
 router.get('/',async(req, res, next)=> {
-  const [url] = await pool.query('SELECT * FROM fotos')
-  console.log(url)
-  res.render('fotos/grid',{url});
+  const [fotos] = await pool.query('SELECT * FROM fotos')
+  console.log(fotos)
+  res.render('fotos/grid',{fotos});
 });
 
 router.get('/add',(req,res,next)=>{
   res.render('fotos/add')
-})
+});
 
 router.post('/add',async(req,res)=>{
   const {titulo, url, descripcion}= req.body
@@ -24,14 +24,22 @@ router.post('/add',async(req,res)=>{
   }
   await pool.query('INSERT INTO fotos SET ?',[newFoto])
   res.redirect('/fotos')
-})
+});
 
-router.post('/borrar/:id', async(req,res)=>{
+// router.post('/delete/:id', async(req,res)=>{
+//   const {id} = req.params
+//   // await pool.query('DELETE FROM fotos WHERE id = ?', [id])
+//   console.log(id)
+//   res.redirect('/')
+
+// })
+
+router.get('/delete/:id', async(req,res)=>{
   const {id} = req.params
+  console.log([id])
   await pool.query('DELETE FROM fotos WHERE id = ?', [id])
-  res.redirect('fotos')
+  res.redirect('/fotos')
 })
-
 
 
 router.get('/edit/:id' ,async(req,res) =>{
@@ -42,7 +50,7 @@ router.get('/edit/:id' ,async(req,res) =>{
 })
 
 router.post('/edit/:id', async(req,res)=>{
-  const {id } = req.params
+  const {id} = req.params
   const {titulo, url, descripcion} = req.body
   const newFoto = {
     titulo,

@@ -35,6 +35,8 @@ app.use(cookieParser());
 
 app.use('/', indexRouter);
 app.use('/fotos', fotosRouter);
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 // catch 404 and forward to error handler
