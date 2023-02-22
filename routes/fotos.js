@@ -26,13 +26,6 @@ router.post('/add',async(req,res)=>{
   res.redirect('/fotos')
 });
 
-// router.post('/delete/:id', async(req,res)=>{
-//   const {id} = req.params
-//   // await pool.query('DELETE FROM fotos WHERE id = ?', [id])
-//   console.log(id)
-//   res.redirect('/')
-
-// })
 
 router.get('/delete/:id', async(req,res)=>{
   const {id} = req.params
@@ -60,5 +53,33 @@ router.post('/edit/:id', async(req,res)=>{
   await pool.query('UPDATE fotos SET ? WHERE id = ?', [newFoto, id])
   res.redirect('/fotos')
 })
+
+
+router.get('/likes/:id',async(req,res)=>{
+  const {id} = req.params
+  const {likes} = req.body
+  console.log(likes)
+  await pool.query('UPDATE FOTOS SET likes = 1 WHERE id = ?', [id])
+  res.redirect('/fotos')
+})
+
+router.get('/dislikes/:id',async(req,res)=>{
+  const {id} = req.params
+  const {dislikes} = req.body
+  console.log(dislikes)
+  await pool.query('UPDATE FOTOS SET dislikes = 1 WHERE id = ?', [id])
+  res.redirect('/fotos')
+})
+
+router.get('/masvotadas',async(req,res)=>{
+  const [fotos] = await pool.query('SELECT * FROM fotos WHERE likes > 0')
+  res.render('fotos/grid',{fotos})
+})
+
+router.get('/menosvotadas',async(req,res)=>{
+  const [fotos] = await pool.query('SELECT * FROM fotos WHERE dislikes > 0')
+  res.render('fotos/grid',{fotos})
+})
+
 
 module.exports = router;
