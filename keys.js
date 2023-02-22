@@ -1,8 +1,8 @@
 module.exports = {
     database:{
-        host: 'localhost',
-        user: 'root',
-        password: 'root',
-        database: 'examen2ev'
+        host: 'bzfffngubk2b6yblaplh-mysql.services.clever-cloud.com',
+        user: 'uvxt45bmuzhxawhk',
+        password: 'AqXlWd8V2cG75qgefkm6',
+        database: 'exabzfffngubk2b6yblaplhmen2ev'
     }
 }
