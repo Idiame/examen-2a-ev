@@ -16,11 +16,13 @@ router.get('/add',(req,res,next)=>{
 });
 
 router.post('/add',async(req,res)=>{
-  const {titulo, url, descripcion}= req.body
+  const {titulo, url, descripcion, likes, dislikes}= req.body
   const newFoto ={
     titulo,
     url,
-    descripcion
+    descripcion,
+    likes : 0,
+    dislikes : 0
   }
   await pool.query('INSERT INTO fotos SET ?',[newFoto])
   res.redirect('/fotos')
@@ -59,7 +61,7 @@ router.get('/likes/:id',async(req,res)=>{
   const {id} = req.params
   const {likes} = req.body
   console.log(likes)
-  await pool.query('UPDATE FOTOS SET likes = 1 WHERE id = ?', [id])
+  await pool.query('UPDATE FOTOS SET likes = likes+1 WHERE id = ?', [id])
   res.redirect('/fotos')
 })
 
@@ -67,17 +69,17 @@ router.get('/dislikes/:id',async(req,res)=>{
   const {id} = req.params
   const {dislikes} = req.body
   console.log(dislikes)
-  await pool.query('UPDATE FOTOS SET dislikes = 1 WHERE id = ?', [id])
+  await pool.query('UPDATE FOTOS SET dislikes = dislikes+1 WHERE id = ?', [id])
   res.redirect('/fotos')
 })
 
 router.get('/masvotadas',async(req,res)=>{
-  const [fotos] = await pool.query('SELECT * FROM fotos WHERE likes > 0')
+  const [fotos] = await pool.query('SELECT * FROM fotos WHERE likes > 5')
   res.render('fotos/grid',{fotos})
 })
 
 router.get('/menosvotadas',async(req,res)=>{
-  const [fotos] = await pool.query('SELECT * FROM fotos WHERE dislikes > 0')
+  const [fotos] = await pool.query('SELECT * FROM fotos WHERE dislikes > 5')
   res.render('fotos/grid',{fotos})
 })
 

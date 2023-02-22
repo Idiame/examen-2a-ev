@@ -4,8 +4,8 @@
             <div class="col-md-3">
                 <div class="card text-center">
                     <div>
-                        <a href="/fotos/dislikes/{{id}}"> <i class="fas fa-cross"></i></a>
-                        <a href="/fotos/likes/{{id}}"> <i class="fas fa-heart"></i></a>
+                        <a href="/fotos/dislikes/{{id}}"> <i class="fas fa-cross"> <p>{{dislikes}}</p></i></a>
+                        <a href="/fotos/likes/{{id}}"> <i class="fas fa-heart"><p>{{likes}}</p></i></a>
                     </div>
                     <h3 class="card-title text-uppercase">{{titulo}}</h3>
                     <img src="{{url}}" class="m-2">
@@ -14,7 +14,7 @@
                     <a href="/fotos/edit/{{id}}" class="btn btn-secondary"> <i class="fas fa-pen"></i></a>    
                 </div>
             </div>
-
+{{!-- 
             <div class="cik-md-3">
                 <div class="card text-center">
                     <div>
@@ -22,7 +22,12 @@
                         <a href="/fotos/likes/{{id}}"> <i class="fas fa-heart"></i></a>
                     </div>
                 </div>
-            </div>
+                <h3 class="card-title text-uppercase">{{titulo}}</h3>
+                <img src="/public/images/" class="m-2">
+                <p>{{descripcion}}</p>
+                <a href="/fotos/delete/{{id}}" class="btn btn-danger"><i class="fas fa-trash"></i></a> 
+                <a href="/fotos/edit/{{id}}" class="btn btn-secondary"> <i class="fas fa-pen"></i></a>    
+            </div> --}}
         {{else}}
             <div class="col-md-4 mx-auto">
                 <div class="card card-body text-center">
