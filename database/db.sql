@@ -1,0 +1,16 @@
+DROP DATABASE IF EXISTS examen2ev;
+CREATE DATABASE examen2ev;
+USE examen2ev;
+
+CREATE TABLE fotos(
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    descripcion VARCHAR(150),
+    titulo VARCHAR(30) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    url VARCHAR(250),
+    likes INT,
+    dislikes INT
+);
+
+
+
